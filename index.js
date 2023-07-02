@@ -10,7 +10,7 @@ io.on('connection', (socket) => {
         socket.peerId = user.peerId;
         if (isExist) return socket.emit('DANG_KY_THAT_BAT');
         arrUser.push(user);
-        io.emit('DANH_SACH', arrUser);
+        socket.emit('DANH_SACH', arrUser);
         socket.broadcast.emit('CO_NGUOI', user);
 	});
 	

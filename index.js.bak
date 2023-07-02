@@ -11,7 +11,7 @@ io.on('connection', (socket) => {
         if (isExist) return socket.emit('DANG_KY_THAT_BAT');
         arrUser.push(user);
         io.emit('DANH_SACH', arrUser);
-        io.broadcast.emit('CO_NGUOI', user);
+        socket.broadcast.emit('CO_NGUOI', user);
 	});
 	
 	socket.on('chat message', (msg) => {
