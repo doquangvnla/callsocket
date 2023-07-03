@@ -12,6 +12,7 @@ io.on('connection', (socket) => {
         arrUser.push(user);
         socket.emit('DANH_SACH', arrUser);
         socket.broadcast.emit('CO_NGUOI', user);
+		console.log("online :" + arrUser.length);
 	});
 	
 	socket.on('chat message', (msg) => {
