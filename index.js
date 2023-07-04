@@ -19,6 +19,24 @@ io.on('connection', (socket) => {
 		io.emit('chat message', msg);
 	});
 	
+	socket.on('offvoice', (peerid) => {
+		io.emit('offvoice', peerid);
+		console.log("offvoice :" + peerid);
+	});
+	socket.on('onvoice', (peerid) => {
+		io.emit('onvoice', peerid);
+		console.log("onvoice :" + peerid);
+	});
+	
+	socket.on('offaudio', (peerid) => {
+		io.emit('offaudio', peerid);
+		console.log("offaudio :" + peerid);
+	});
+	socket.on('onaudio', (peerid) => {
+		io.emit('onaudio', peerid);
+		console.log("onaudio :" + peerid);
+	});
+	
 	socket.on('disconnect', () => {
         const index = arrUser.findIndex(user => user.peerId === socket.peerId);
         if(index !== -1){

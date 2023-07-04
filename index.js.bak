@@ -10,17 +10,39 @@ io.on('connection', (socket) => {
         socket.peerId = user.peerId;
         if (isExist) return socket.emit('DANG_KY_THAT_BAT');
         arrUser.push(user);
-        io.emit('DANH_SACH', arrUser);
+        socket.emit('DANH_SACH', arrUser);
         socket.broadcast.emit('CO_NGUOI', user);
+		console.log("online :" + arrUser.length);
 	});
 	
 	socket.on('chat message', (msg) => {
 		io.emit('chat message', msg);
 	});
 	
+	socket.on('offvoice', (peerid) => {
+		io.emit('offvoice', peeid);
+		console.log("offvoice :" + peerid);
+	});
+	socket.on('onvoice', (peerid) => {
+		io.emit('onvoice', peerid);
+		console.log("onvoice :" + peerid);
+	});
+	
+	socket.on('offaudio', (peerid) => {
+		io.emit('offaudio', peerid);
+		console.log("offaudio :" + peerid);
+	});
+	socket.on('onaudio', (peerid) => {
+		io.emit('onaudio', peerid);
+		console.log("onaudio :" + peerid);
+	});
+	
 	socket.on('disconnect', () => {
         const index = arrUser.findIndex(user => user.peerId === socket.peerId);
-        arrUser.splice(index, 1);
-        io.emit('AI_DO_NGAT_KET_NOI', socket.peerId);
+        if(index !== -1){
+			arrUser.splice(index, 1);
+			io.emit('AI_DO_NGAT_KET_NOI', socket.peerId);
+			console.log("disconnect peerId :" + socket.peerId + " ten :" + socket.ten);
+		}
     });
 });
